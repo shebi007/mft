@@ -19,7 +19,7 @@ export function SiteHeader() {
           className="relative block h-11 w-[128px] overflow-hidden md:h-12 md:w-[140px]"
         >
           <Image
-            src="/images/mft-logo.png"
+            src="/images/mft-icon.png"
             alt="Muazzam Future Tech logo"
             width={1536}
             height={1024}

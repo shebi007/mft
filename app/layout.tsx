@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | SaaS & Agentic AI Solutions`,
     description: siteConfig.description,
-    images: [{ url: '/images/mft-logo.png', width: 1536, height: 1024, alt: 'Muazzam Future Tech logo' }],
+    images: [{ url: '/images/mft-icon.png', width: 1536, height: 1024, alt: 'Muazzam Future Tech logo' }],
   },
   twitter: {
     card: 'summary_large_image',
