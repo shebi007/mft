@@ -1,0 +1,248 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(0.99 0.003 260);
+  --foreground: oklch(0.2 0.04 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.04 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.04 265);
+  /* Royal blue from the MFT logo */
+  --primary: oklch(0.45 0.2 265);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.015 265);
+  --secondary-foreground: oklch(0.3 0.12 265);
+  --muted: oklch(0.96 0.01 265);
+  --muted-foreground: oklch(0.48 0.03 265);
+  /* Amber from the logo heart stroke */
+  --accent: oklch(0.8 0.16 75);
+  --accent-foreground: oklch(0.22 0.05 60);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.91 0.015 265);
+  --input: oklch(0.91 0.015 265);
+  --ring: oklch(0.45 0.2 265);
+  --ink: oklch(0.2 0.06 268);
+  --ink-foreground: oklch(0.97 0.01 265);
+  --radius: 0.75rem;
+}
+
+/* ---------- Tilt + spotlight cards ---------- */
+.tilt-card {
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+  perspective: 900px;
+  border-radius: var(--radius-2xl);
+}
+.tilt-card-inner {
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out, box-shadow 0.3s ease;
+}
+.tilt-card:hover .tilt-card-inner {
+  transition: transform 0.08s linear, box-shadow 0.3s ease;
+  box-shadow: 0 24px 48px -20px oklch(0.45 0.2 265 / 0.35);
+}
+.tilt-card-glow {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background:
+    radial-gradient(420px circle at var(--mx) var(--my), oklch(0.8 0.16 75 / 0.16), transparent 45%),
+    radial-gradient(260px circle at var(--mx) var(--my), oklch(0.45 0.2 265 / 0.12), transparent 60%);
+}
+.tilt-card-dark .tilt-card-glow {
+  background: radial-gradient(360px circle at var(--mx) var(--my), oklch(0.8 0.16 75 / 0.22), transparent 50%);
+}
+.tilt-card:hover .tilt-card-glow {
+  opacity: 1;
+}
+.tilt-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(240px circle at var(--mx) var(--my), oklch(0.8 0.16 75), oklch(0.45 0.2 265 / 0.6) 40%, transparent 70%);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* ---------- Animated MFT logo ---------- */
+.mft-heart-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: mft-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards, mft-pulse 3.2s ease-in-out 1.6s infinite;
+}
+.mft-logo:hover .mft-heart-path {
+  animation: mft-redraw 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.mft-comet {
+  filter: drop-shadow(0 0 4px oklch(0.85 0.16 80));
+}
+.mft-letter {
+  opacity: 0;
+  transform: translateY(40%);
+  animation: mft-rise 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) forwards;
+}
+.mft-shimmer {
+  background: linear-gradient(
+    100deg,
+    oklch(0.45 0.2 265) 0%,
+    oklch(0.45 0.2 265) 40%,
+    oklch(0.82 0.16 75) 50%,
+    oklch(0.45 0.2 265) 60%,
+    oklch(0.45 0.2 265) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: mft-shine 3.2s linear infinite;
+}
+.mft-shimmer .mft-letter {
+  background: inherit;
+  background-size: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.mft-sub {
+  animation: mft-fade 0.8s ease 0.8s both;
+}
+@keyframes mft-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes mft-redraw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes mft-pulse {
+  0%,
+  100% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 5px oklch(0.8 0.16 75 / 0.55));
+  }
+}
+@keyframes mft-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes mft-shine {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes mft-fade {
+  from {
+    opacity: 0;
+    letter-spacing: 0.9em;
+  }
+}
+
+/* ---------- Misc hover motion ---------- */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.hover-float:hover {
+  animation: float-y 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mft-heart-path,
+  .mft-letter,
+  .mft-shimmer,
+  .mft-sub,
+  .hover-float:hover {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+  }
+  .mft-comet {
+    display: none;
+  }
+  .tilt-card-inner {
+    transform: none !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
