@@ -16,7 +16,7 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="Muazzam Future Tech home"
-          className="relative block h-11 w-[128px] overflow-hidden md:h-[42px] md:w-[140px]"
+          className="relative block h-[40px] w-[128px] overflow-hidden md:h-[42px] md:w-[140px]"
         >
           <Image
             src="/images/mft-icon.png"
